@@ -5,18 +5,122 @@
             <span class="kdao-k">K</span>DAO Proposals
         </h1>
         <p class="page-subtitle">
-            <span data-lang="de">Reiche Vorschläge ein und diskutiere über die Zukunft von KDAO</span>
-            <span data-lang="en" style="display:none;">Submit proposals and discuss the future of KDAO</span>
+            <span data-lang="de">Reiche Vorschläge ein und gestalte die Zukunft des KRC20-Ökosystems</span>
+            <span data-lang="en" style="display:none;">Submit proposals and shape the future of the KRC20 ecosystem</span>
         </p>
     </div>
 
-    <!-- Create Proposal Button -->
-    <div style="text-align: center; margin-bottom: 40px;">
-        <button class="create-proposal-btn" onclick="alert('Proposal-Einreichung kommt bald!')">
+    <!-- Treasury Overview Section -->
+    <div class="treasury-overview">
+        <div class="treasury-card">
+            <div class="treasury-header">
+                <h3>💰 Treasury Status</h3>
+                <span class="treasury-badge">
+                    <span data-lang="de">Verfügbar für Förderung</span>
+                    <span data-lang="en" style="display:none;">Available for Funding</span>
+                </span>
+            </div>
+            <div class="treasury-stats">
+                <div class="treasury-stat">
+                    <span class="t-label">
+                        <span data-lang="de">Gesamt Treasury</span>
+                        <span data-lang="en" style="display:none;">Total Treasury</span>
+                    </span>
+                    <span class="t-value">500,000 KDAO</span>
+                </div>
+                <div class="treasury-stat">
+                    <span class="t-label">
+                        <span data-lang="de">Verfügbar</span>
+                        <span data-lang="en" style="display:none;">Available</span>
+                    </span>
+                    <span class="t-value success">320,000 KDAO</span>
+                </div>
+                <div class="treasury-stat">
+                    <span class="t-label">
+                        <span data-lang="de">Zugewiesen</span>
+                        <span data-lang="en" style="display:none;">Allocated</span>
+                    </span>
+                    <span class="t-value">180,000 KDAO</span>
+                </div>
+                <div class="treasury-stat">
+                    <span class="t-label">
+                        <span data-lang="de">Geförderte Projekte</span>
+                        <span data-lang="en" style="display:none;">Funded Projects</span>
+                    </span>
+                    <span class="t-value">12</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Funding Categories -->
+    <div class="funding-categories">
+        <h2 class="section-title">
+            <span data-lang="de">📋 Förderbare Kategorien</span>
+            <span data-lang="en" style="display:none;">📋 Fundable Categories</span>
+        </h2>
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-icon">🔧</div>
+                <h4>
+                    <span data-lang="de">Utility-Projekte</span>
+                    <span data-lang="en" style="display:none;">Utility Projects</span>
+                </h4>
+                <p>
+                    <span data-lang="de">Bridges, Wallets, DEXs, Block Explorer, Analytics Tools</span>
+                    <span data-lang="en" style="display:none;">Bridges, Wallets, DEXs, Block Explorers, Analytics Tools</span>
+                </p>
+                <div class="category-stats">
+                    <span>5 <span data-lang="de">Projekte gefördert</span><span data-lang="en" style="display:none;">Projects funded</span></span>
+                    <span>150K KDAO</span>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">🪙</div>
+                <h4>
+                    <span data-lang="de">Token-Projekte</span>
+                    <span data-lang="en" style="display:none;">Token Projects</span>
+                </h4>
+                <p>
+                    <span data-lang="de">Innovative KRC20 Tokens, Memecoins, DeFi Tokens</span>
+                    <span data-lang="en" style="display:none;">Innovative KRC20 Tokens, Memecoins, DeFi Tokens</span>
+                </p>
+                <div class="category-stats">
+                    <span>3 <span data-lang="de">Projekte gefördert</span><span data-lang="en" style="display:none;">Projects funded</span></span>
+                    <span>50K KDAO</span>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">🎓</div>
+                <h4>
+                    <span data-lang="de">Bildung & Events</span>
+                    <span data-lang="en" style="display:none;">Education & Events</span>
+                </h4>
+                <p>
+                    <span data-lang="de">Workshops, Tutorials, Dokumentation, Community Events</span>
+                    <span data-lang="en" style="display:none;">Workshops, Tutorials, Documentation, Community Events</span>
+                </p>
+                <div class="category-stats">
+                    <span>4 <span data-lang="de">Projekte gefördert</span><span data-lang="en" style="display:none;">Projects funded</span></span>
+                    <span>30K KDAO</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Proposal Section -->
+    <div class="create-section">
+        <button class="create-proposal-btn" onclick="openProposalForm()">
             <span>+ </span>
-            <span data-lang="de">Neuen Vorschlag einreichen</span>
-            <span data-lang="en" style="display:none;">Submit New Proposal</span>
+            <span data-lang="de">Neuen Förderantrag einreichen (KIP)</span>
+            <span data-lang="en" style="display:none;">Submit New Funding Proposal (KIP)</span>
         </button>
+        <p class="create-info">
+            <span data-lang="de">Minimum 100 KDAO zum Einreichen • 30% Quorum erforderlich • 7 Tage Abstimmungszeit</span>
+            <span data-lang="en" style="display:none;">Minimum 100 KDAO to submit • 30% Quorum required • 7 days voting period</span>
+        </p>
     </div>
 
     <!-- Filter Tabs -->
@@ -29,9 +133,13 @@
             <span data-lang="de">Aktiv</span>
             <span data-lang="en" style="display:none;">Active</span>
         </button>
-        <button class="filter-tab" onclick="filterProposals('pending')">
-            <span data-lang="de">Ausstehend</span>
-            <span data-lang="en" style="display:none;">Pending</span>
+        <button class="filter-tab" onclick="filterProposals('funding')">
+            <span data-lang="de">Förderung</span>
+            <span data-lang="en" style="display:none;">Funding</span>
+        </button>
+        <button class="filter-tab" onclick="filterProposals('governance')">
+            <span data-lang="de">Governance</span>
+            <span data-lang="en" style="display:none;">Governance</span>
         </button>
         <button class="filter-tab" onclick="filterProposals('completed')">
             <span data-lang="de">Abgeschlossen</span>
@@ -42,43 +150,106 @@
     <!-- Proposals List -->
     <div class="proposals-list">
         
-        <!-- Active Proposal -->
-        <div class="proposal-card active" data-status="active">
+        <!-- Active Funding Proposal -->
+        <div class="proposal-card active funding" data-status="active" data-type="funding">
             <div class="proposal-header">
                 <div>
-                    <span class="proposal-id">#KIP-001</span>
+                    <span class="proposal-id">#KIP-004</span>
                     <span class="proposal-status active">
                         <span data-lang="de">Aktiv</span>
                         <span data-lang="en" style="display:none;">Active</span>
                     </span>
+                    <span class="proposal-category utility">🔧 Utility</span>
+                </div>
+                <span class="proposal-amount">50,000 KDAO</span>
+            </div>
+            
+            <h3 class="proposal-title">
+                <span data-lang="de">KRC20 Bridge zu Ethereum</span>
+                <span data-lang="en" style="display:none;">KRC20 Bridge to Ethereum</span>
+            </h3>
+            
+            <p class="proposal-description">
+                <span data-lang="de">Entwicklung einer dezentralen Bridge für KRC20 Token zu Ethereum. Dies ermöglicht Cross-Chain-Liquidität und erweitert die Reichweite des Kaspa-Ökosystems.</span>
+                <span data-lang="en" style="display:none;">Development of a decentralized bridge for KRC20 tokens to Ethereum. This enables cross-chain liquidity and extends the reach of the Kaspa ecosystem.</span>
+            </p>
+            
+            <div class="proposal-progress">
+                <div class="progress-info">
+                    <span>68% <span data-lang="de">Zustimmung</span><span data-lang="en" style="display:none;">Approval</span></span>
+                    <span>45% <span data-lang="de">Beteiligung</span><span data-lang="en" style="display:none;">Participation</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill yes" style="width: 68%;"></div>
+                </div>
+            </div>
+            
+            <div class="proposal-meta">
+                <span>👤 Dev Team Alpha</span>
+                <span>📅 01.09.2025</span>
+                <span>⏰ <span data-lang="de">3 Tage verbleibend</span><span data-lang="en" style="display:none;">3 days left</span></span>
+                <span>💬 45 <span data-lang="de">Kommentare</span><span data-lang="en" style="display:none;">Comments</span></span>
+            </div>
+            
+            <div class="proposal-actions">
+                <button class="btn-primary" onclick="loadPage('voting')">
+                    <span data-lang="de">Jetzt abstimmen</span>
+                    <span data-lang="en" style="display:none;">Vote Now</span>
+                </button>
+                <button class="btn-secondary">
+                    <span data-lang="de">Details</span>
+                    <span data-lang="en" style="display:none;">Details</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Active Treasury Allocation -->
+        <div class="proposal-card active governance" data-status="active" data-type="governance">
+            <div class="proposal-header">
+                <div>
+                    <span class="proposal-id">#KIP-003</span>
+                    <span class="proposal-status active">
+                        <span data-lang="de">Aktiv</span>
+                        <span data-lang="en" style="display:none;">Active</span>
+                    </span>
+                    <span class="proposal-category governance">🏛️ Governance</span>
                 </div>
                 <span class="proposal-time">
-                    <span data-lang="de">Endet in 3 Tagen</span>
-                    <span data-lang="en" style="display:none;">Ends in 3 days</span>
+                    <span data-lang="de">Endet in 5 Tagen</span>
+                    <span data-lang="en" style="display:none;">Ends in 5 days</span>
                 </span>
             </div>
             
             <h3 class="proposal-title">
-                <span data-lang="de">Treasury Allocation für Q4 2025</span>
-                <span data-lang="en" style="display:none;">Treasury Allocation for Q4 2025</span>
+                <span data-lang="de">Q4 2025 Treasury Allocation</span>
+                <span data-lang="en" style="display:none;">Q4 2025 Treasury Allocation</span>
             </h3>
             
             <p class="proposal-description">
-                <span data-lang="de">Vorschlag zur optimalen Verteilung der Treasury-Mittel für Marketing, Entwicklung und Community-Rewards im vierten Quartal 2025. Ziel ist es, das Wachstum zu maximieren und gleichzeitig die finanzielle Nachhaltigkeit zu gewährleisten.</span>
-                <span data-lang="en" style="display:none;">Proposal for optimal distribution of treasury funds for marketing, development and community rewards in Q4 2025. The goal is to maximize growth while ensuring financial sustainability.</span>
+                <span data-lang="de">Vorschlag zur Verteilung von 200.000 KDAO: 40% Utility (80K), 30% Marketing (60K), 20% Education (40K), 10% Reserve (20K)</span>
+                <span data-lang="en" style="display:none;">Proposal to distribute 200,000 KDAO: 40% Utility (80K), 30% Marketing (60K), 20% Education (40K), 10% Reserve (20K)</span>
             </p>
             
+            <div class="proposal-progress">
+                <div class="progress-info">
+                    <span>72% <span data-lang="de">Zustimmung</span><span data-lang="en" style="display:none;">Approval</span></span>
+                    <span>38% <span data-lang="de">Beteiligung</span><span data-lang="en" style="display:none;">Participation</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill yes" style="width: 72%;"></div>
+                </div>
+            </div>
+            
             <div class="proposal-meta">
-                <span>👤 Peter W.</span>
-                <span>📅 01.09.2025</span>
-                <span>💬 23 <span data-lang="de">Kommentare</span><span data-lang="en" style="display:none;">Comments</span></span>
-                <span>👍 156 <span data-lang="de">Unterstützer</span><span data-lang="en" style="display:none;">Supporters</span></span>
+                <span>👤 Treasury Committee</span>
+                <span>📅 28.08.2025</span>
+                <span>💬 67 <span data-lang="de">Kommentare</span><span data-lang="en" style="display:none;">Comments</span></span>
             </div>
             
             <div class="proposal-actions">
-                <button class="btn-primary">
-                    <span data-lang="de">Details ansehen</span>
-                    <span data-lang="en" style="display:none;">View Details</span>
+                <button class="btn-primary" onclick="loadPage('voting')">
+                    <span data-lang="de">Abstimmen</span>
+                    <span data-lang="en" style="display:none;">Vote</span>
                 </button>
                 <button class="btn-secondary">
                     <span data-lang="de">Diskutieren</span>
@@ -88,79 +259,71 @@
         </div>
 
         <!-- Pending Proposal -->
-        <div class="proposal-card" data-status="pending">
+        <div class="proposal-card pending funding" data-status="pending" data-type="funding">
             <div class="proposal-header">
                 <div>
-                    <span class="proposal-id">#KIP-002</span>
+                    <span class="proposal-id">#KIP-005</span>
                     <span class="proposal-status pending">
                         <span data-lang="de">Ausstehend</span>
                         <span data-lang="en" style="display:none;">Pending</span>
                     </span>
+                    <span class="proposal-category education">🎓 Education</span>
                 </div>
-                <span class="proposal-time">
-                    <span data-lang="de">Startet in 2 Tagen</span>
-                    <span data-lang="en" style="display:none;">Starts in 2 days</span>
-                </span>
+                <span class="proposal-amount">15,000 KDAO</span>
             </div>
             
             <h3 class="proposal-title">
-                <span data-lang="de">Partnerschaft mit Zealous Swap</span>
-                <span data-lang="en" style="display:none;">Partnership with Zealous Swap</span>
+                <span data-lang="de">Kaspa Developer Workshop Serie</span>
+                <span data-lang="en" style="display:none;">Kaspa Developer Workshop Series</span>
             </h3>
             
             <p class="proposal-description">
-                <span data-lang="de">Integration von KDAO in den Zealous Swap DEX mit exklusiven Liquidity Mining Rewards für frühe Teilnehmer.</span>
-                <span data-lang="en" style="display:none;">Integration of KDAO into Zealous Swap DEX with exclusive liquidity mining rewards for early participants.</span>
+                <span data-lang="de">Organisation einer 6-teiligen Workshop-Serie für KRC20 Entwicklung mit praktischen Tutorials und Code-Beispielen.</span>
+                <span data-lang="en" style="display:none;">Organization of a 6-part workshop series for KRC20 development with practical tutorials and code examples.</span>
             </p>
             
             <div class="proposal-meta">
-                <span>👤 Community</span>
-                <span>📅 28.08.2025</span>
-                <span>💬 45 <span data-lang="de">Kommentare</span><span data-lang="en" style="display:none;">Comments</span></span>
-                <span>👍 203 <span data-lang="de">Unterstützer</span><span data-lang="en" style="display:none;">Supporters</span></span>
+                <span>👤 Education DAO</span>
+                <span>📅 02.09.2025</span>
+                <span>🚀 <span data-lang="de">Startet in 2 Tagen</span><span data-lang="en" style="display:none;">Starts in 2 days</span></span>
             </div>
             
             <div class="proposal-actions">
-                <button class="btn-primary">
+                <button class="btn-secondary">
                     <span data-lang="de">Details ansehen</span>
                     <span data-lang="en" style="display:none;">View Details</span>
-                </button>
-                <button class="btn-secondary">
-                    <span data-lang="de">Diskutieren</span>
-                    <span data-lang="en" style="display:none;">Discuss</span>
                 </button>
             </div>
         </div>
 
         <!-- Completed Proposal -->
-        <div class="proposal-card completed" data-status="completed">
+        <div class="proposal-card completed funding" data-status="completed" data-type="funding">
             <div class="proposal-header">
                 <div>
-                    <span class="proposal-id">#KIP-000</span>
+                    <span class="proposal-id">#KIP-002</span>
                     <span class="proposal-status completed">
                         <span data-lang="de">Abgeschlossen</span>
                         <span data-lang="en" style="display:none;">Completed</span>
                     </span>
+                    <span class="proposal-category utility">🔧 Utility</span>
                 </div>
-                <span class="proposal-result approved">
-                    ✅ <span data-lang="de">Angenommen</span><span data-lang="en" style="display:none;">Approved</span>
-                </span>
+                <span class="proposal-result approved">✅ <span data-lang="de">Genehmigt</span><span data-lang="en" style="display:none;">Approved</span></span>
             </div>
             
             <h3 class="proposal-title">
-                <span data-lang="de">KDAO 2.0 Governance Struktur</span>
-                <span data-lang="en" style="display:none;">KDAO 2.0 Governance Structure</span>
+                <span data-lang="de">KDAO Block Explorer Development</span>
+                <span data-lang="en" style="display:none;">KDAO Block Explorer Development</span>
             </h3>
             
             <p class="proposal-description">
-                <span data-lang="de">Etablierung der grundlegenden Governance-Struktur für KDAO 2.0 mit klaren Rollen und Verantwortlichkeiten.</span>
-                <span data-lang="en" style="display:none;">Establishment of the basic governance structure for KDAO 2.0 with clear roles and responsibilities.</span>
+                <span data-lang="de">Entwicklung eines dedizierten KRC20 Token Explorers mit erweiterten Analytics-Features.</span>
+                <span data-lang="en" style="display:none;">Development of a dedicated KRC20 token explorer with advanced analytics features.</span>
             </p>
             
-            <div class="proposal-meta">
-                <span>👤 KDAO Team</span>
-                <span>📅 15.08.2025</span>
-                <span>🗳️ 89% <span data-lang="de">Zustimmung</span><span data-lang="en" style="display:none;">Approval</span></span>
+            <div class="proposal-result-stats">
+                <span>✅ 85% <span data-lang="de">Zustimmung</span><span data-lang="en" style="display:none;">Approval</span></span>
+                <span>📊 52% <span data-lang="de">Beteiligung</span><span data-lang="en" style="display:none;">Participation</span></span>
+                <span>💰 30,000 KDAO</span>
             </div>
         </div>
 
@@ -168,7 +331,214 @@
 </div>
 
 <style>
-/* Proposals Page Styles */
+/* Treasury Overview */
+.treasury-overview {
+    margin-bottom: 40px;
+}
+
+.treasury-card {
+    background: linear-gradient(135deg, rgba(95, 251, 241, 0.05) 0%, rgba(10, 20, 40, 0.8) 100%);
+    border: 1px solid rgba(95, 251, 241, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.treasury-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.treasury-header h3 {
+    font-size: 24px;
+    color: #5ffbf1;
+    margin: 0;
+}
+
+.treasury-badge {
+    padding: 8px 16px;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.treasury-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.treasury-stat {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(95, 251, 241, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.t-label {
+    display: block;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+}
+
+.t-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.t-value.success {
+    color: #10b981;
+}
+
+/* Funding Categories */
+.funding-categories {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.category-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(95, 251, 241, 0.1);
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(95, 251, 241, 0.2);
+    box-shadow: 0 10px 30px rgba(95, 251, 241, 0.15);
+}
+
+.category-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.category-card h4 {
+    font-size: 16px;
+    color: #5ffbf1;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.category-stats {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid rgba(95, 251, 241, 0.1);
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Create Section */
+.create-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.create-info {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Proposal Categories */
+.proposal-category {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.proposal-category.utility {
+    background: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
+
+.proposal-category.governance {
+    background: rgba(147, 51, 234, 0.2);
+    color: #9333ea;
+}
+
+.proposal-category.education {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}
+
+/* Proposal Amount */
+.proposal-amount {
+    font-size: 16px;
+    font-weight: 700;
+    color: #10b981;
+}
+
+/* Proposal Progress */
+.proposal-progress {
+    margin: 20px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill.yes {
+    height: 100%;
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* Result Stats */
+.proposal-result-stats {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* Existing styles remain... */
 .proposals-container {
     padding: 20px;
     max-width: 1200px;
@@ -193,7 +563,6 @@
     color: #94a3b8;
 }
 
-/* Create Proposal Button */
 .create-proposal-btn {
     padding: 15px 35px;
     background: linear-gradient(135deg, #5ffbf1 0%, #26d0a8 100%);
@@ -212,7 +581,6 @@
     box-shadow: 0 15px 40px rgba(95, 251, 241, 0.4);
 }
 
-/* Filter Tabs */
 .filter-tabs {
     display: flex;
     gap: 10px;
@@ -244,13 +612,11 @@
     border-color: transparent;
 }
 
-/* Proposals List */
 .proposals-list {
     display: grid;
     gap: 25px;
 }
 
-/* Proposal Card */
 .proposal-card {
     background: linear-gradient(135deg, rgba(14, 28, 54, 0.6) 0%, rgba(10, 20, 40, 0.8) 100%);
     border: 1px solid rgba(95, 251, 241, 0.15);
@@ -407,12 +773,16 @@
     .btn-primary, .btn-secondary {
         width: 100%;
     }
+    
+    .treasury-stats {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 </style>
 
 <script>
 // Filter proposals
-function filterProposals(status) {
+function filterProposals(filter) {
     // Update active tab
     document.querySelectorAll('.filter-tab').forEach(tab => {
         tab.classList.remove('active');
@@ -421,12 +791,19 @@ function filterProposals(status) {
     
     // Filter cards
     document.querySelectorAll('.proposal-card').forEach(card => {
-        if (status === 'all') {
+        if (filter === 'all') {
             card.style.display = 'block';
+        } else if (filter === 'funding' || filter === 'governance') {
+            card.style.display = card.dataset.type === filter ? 'block' : 'none';
         } else {
-            card.style.display = card.dataset.status === status ? 'block' : 'none';
+            card.style.display = card.dataset.status === filter ? 'block' : 'none';
         }
     });
+}
+
+// Open proposal form
+function openProposalForm() {
+    alert('Proposal-Formular wird bald verfügbar sein / Proposal form coming soon');
 }
 
 // Apply saved language
