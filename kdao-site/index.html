@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KDAO 2.0</title>
+    <title>KDAO 2.0 - DeFi Engine for Kaspa</title>
+    <meta name="description" content="KDAO 2.0 - Next-Generation DeFi Engine for the Kaspa Ecosystem">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/team.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/themes.css">
+    
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Language Switcher -->
@@ -36,8 +46,9 @@
     <div class="bg-particles" id="particles"></div>
 
     <!-- API Status Indicator -->
-    <div id="apiStatus" style="position: fixed; bottom: 20px; right: 20px; background: rgba(10, 15, 27, 0.9); padding: 10px 15px; border-radius: 8px; border: 1px solid rgba(95, 251, 241, 0.2); font-size: 12px; z-index: 9999; display: flex; align-items: center; gap: 8px;">
-        <span style="color: #94a3b8;">API Status: Initialisiere...</span>
+    <div id="apiStatus" class="api-status">
+        <span class="status-dot"></span>
+        <span class="status-text">API Status: Initialisiere...</span>
     </div>
 
     <!-- Sidebar -->
@@ -55,41 +66,54 @@
         <div class="nav-section">
             <!-- HAUPTMENÜ -->
             <div class="nav-category">
-                <div class="nav-category-title">Hauptmenü</div>
+                <div class="nav-category-title" data-lang="de">Hauptmenü</div>
+                <div class="nav-category-title" data-lang="en" style="display:none;">Main Menu</div>
+                
                 <div class="nav-item active" onclick="loadPage('dashboard')">
                     <span class="nav-icon">🏠</span>
-                    <span>Dashboard</span>
+                    <span data-lang="de">Dashboard</span>
+                    <span data-lang="en" style="display:none;">Dashboard</span>
                 </div>
+                
                 <div class="nav-item" onclick="loadPage('team')">
                     <span class="nav-icon">👥</span>
-                    <span>Team</span>
+                    <span data-lang="de">Team</span>
+                    <span data-lang="en" style="display:none;">Team</span>
                 </div>
             </div>
 
             <!-- PROJECT INFO -->
             <div class="nav-category">
-                <div class="nav-category-title">Project Info</div>
+                <div class="nav-category-title" data-lang="de">Projekt Info</div>
+                <div class="nav-category-title" data-lang="en" style="display:none;">Project Info</div>
+                
                 <div class="nav-item" onclick="loadPage('news')">
                     <span class="nav-icon">📰</span>
-                    <span>News</span>
+                    <span data-lang="de">Neuigkeiten</span>
+                    <span data-lang="en" style="display:none;">News</span>
                 </div>
+                
                 <div class="nav-item" onclick="loadPage('roadmap')">
                     <span class="nav-icon">🗺️</span>
-                    <span>Roadmap</span>
+                    <span data-lang="de">Roadmap</span>
+                    <span data-lang="en" style="display:none;">Roadmap</span>
                 </div>
             </div>
 
             <!-- DEFI ENGINE -->
             <div class="nav-category">
                 <div class="nav-category-title">DeFi Engine</div>
+                
                 <div class="nav-item" onclick="loadPage('staking')">
                     <span class="nav-icon">💎</span>
                     <span>Staking</span>
                 </div>
+                
                 <div class="nav-item" onclick="loadPage('treasury')">
                     <span class="nav-icon">🏦</span>
                     <span>Treasury</span>
                 </div>
+                
                 <div class="nav-item" onclick="loadPage('governance')">
                     <span class="nav-icon">🗳️</span>
                     <span>Governance</span>
@@ -98,68 +122,184 @@
 
             <!-- ÖKOSYSTEM -->
             <div class="nav-category">
-                <div class="nav-category-title">Ökosystem</div>
+                <div class="nav-category-title" data-lang="de">Ökosystem</div>
+                <div class="nav-category-title" data-lang="en" style="display:none;">Ecosystem</div>
+                
                 <div class="nav-item" onclick="window.open('https://www.coinex.com/exchange/kdao-usdt', '_blank')">
                     <span class="nav-icon">💱</span>
-                    <span>Auf CoinEx handeln</span>
+                    <span data-lang="de">Auf CoinEx handeln</span>
+                    <span data-lang="en" style="display:none;">Trade on CoinEx</span>
                 </div>
+                
                 <div class="nav-item" onclick="window.open('https://discord.gg/kaspadao', '_blank')">
                     <span class="nav-icon">💬</span>
                     <span>Discord</span>
                 </div>
+                
+                <div class="nav-item" onclick="window.open('https://twitter.com/kaspadao', '_blank')">
+                    <span class="nav-icon">🐦</span>
+                    <span>Twitter</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="sidebar-footer">
+            <div class="footer-info">
+                <small data-lang="de">© 2025 KDAO 2.0</small>
+                <small data-lang="en" style="display:none;">© 2025 KDAO 2.0</small>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="main-content">
-        <div class="loading-spinner">Loading KDAO 2.0...</div>
+    <div class="main-content" id="mainContent">
+        <div class="loading-spinner">
+            <div class="spinner-text">Loading KDAO 2.0...</div>
+        </div>
     </div>
 
-    <!-- Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
     <!-- App Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/app.js"></script>
-    
+
+    <!-- Inline Critical Styles -->
     <style>
         /* KDAO K Mirror Effect */
-        .kdao-k {
+        .logo-k, .kdao-k {
             display: inline-block;
             transform: scaleX(-1);
             font-weight: 900;
             background: linear-gradient(135deg, #5ffbf1 0%, #49eacb 50%, #26d0a8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* API Status */
+        .api-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 15, 27, 0.95);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(95, 251, 241, 0.2);
+            font-size: 12px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #94a3b8;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.active {
+            background: #10b981;
+        }
+
+        .status-text {
+            color: #94a3b8;
         }
         
         /* Loading Spinner */
         .loading-spinner {
-            text-align: center;
-            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .spinner-text {
             color: #5ffbf1;
             font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
         
         .loading-spinner::after {
             content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-left: 10px;
-            border: 2px solid #5ffbf1;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(95, 251, 241, 0.2);
+            border-top-color: #5ffbf1;
             border-radius: 50%;
-            border-top-color: transparent;
             animation: spin 0.8s linear infinite;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1); 
+                opacity: 0.7; 
+            }
+            50% { 
+                transform: scale(1.5); 
+                opacity: 1; 
+            }
+        }
         
-        /* Quick fixes for visibility */
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 10001;
+            background: rgba(10, 15, 27, 0.9);
+            border: 1px solid rgba(95, 251, 241, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: #5ffbf1;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* Sidebar Footer */
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            border-top: 1px solid rgba(95, 251, 241, 0.1);
+            text-align: center;
+        }
+
+        .footer-info {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* Quick Fixes */
         .stat-value.positive {
             color: #10b981 !important;
         }
@@ -168,7 +308,6 @@
             color: #ef4444 !important;
         }
         
-        /* Canvas container fix */
         .chart-container {
             position: relative;
             height: 200px;
@@ -177,6 +316,32 @@
         #liveChart, #sparkline {
             max-height: 100%;
             width: 100% !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .language-switcher {
+                top: 20px;
+                right: 70px;
+            }
         }
     </style>
 </body>

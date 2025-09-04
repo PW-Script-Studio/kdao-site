@@ -1,4 +1,4 @@
-// KDAO App mit Proxy für Live-Daten
+// KDAO App mit Navigation Fix
 console.log('KDAO App gestartet!');
 
 // Language Switcher
@@ -21,131 +21,21 @@ function setLanguage(lang) {
     });
 }
 
-// Fetch KDAO data using proxy
-async function testAPI() {
-    console.log('Fetching KDAO data...');
+// Update active navigation
+function updateActiveNavigation(pageName) {
+    // Remove active class from all nav items
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
     
-    try {
-        // Use CORS proxy for API calls
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        const apiUrl = 'https://api.coinex.com/v1/market/ticker?market=KDAOUSDT';
-        
-        // Try direct first
-        let response = await fetch(apiUrl).catch(() => null);
-        
-        // If direct fails, try with proxy
-        if (!response || !response.ok) {
-            console.log('Direct API failed, trying proxy...');
-            response = await fetch(proxyUrl + apiUrl);
+    // Add active class to the clicked nav item
+    document.querySelectorAll('.nav-item').forEach(item => {
+        // Check if the nav item's onclick contains the page name
+        const onclickAttr = item.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes(`loadPage('${pageName}')`)) {
+            item.classList.add('active');
         }
-        
-        if (response && response.ok) {
-            const data = await response.json();
-            
-            if (data.code === 0 && data.data && data.data.ticker) {
-                const ticker = data.data.ticker;
-                const price = parseFloat(ticker.last) || 0.00000114;
-                const open = parseFloat(ticker.open) || price;
-                const change = ((price - open) / open * 100) || -17.00;
-                const volume = parseFloat(ticker.vol) || 3500;
-                const high = parseFloat(ticker.high) || price * 1.1;
-                const low = parseFloat(ticker.low) || price * 0.9;
-                
-                // Update UI
-                document.getElementById('currentPrice').textContent = `$${price.toFixed(8)}`;
-                document.getElementById('change24').textContent = `${change > 0 ? '+' : ''}${change.toFixed(2)}%`;
-                document.getElementById('change24').className = `stat-value ${change > 0 ? 'positive' : 'negative'}`;
-                document.getElementById('volume24').textContent = volume > 1000 ? `$${(volume / 1000).toFixed(1)}K` : `$${volume.toFixed(0)}`;
-                document.getElementById('highLow').textContent = `$${high.toFixed(8)} / $${low.toFixed(8)}`;
-                
-                // Update signal
-                updateSignal(price, change);
-                
-                // Update status
-                const statusEl = document.getElementById('apiStatus');
-                if (statusEl) {
-                    statusEl.innerHTML = '<span style="color: #10b981;">✅ Live Data Connected</span>';
-                }
-                
-                return { success: true, price, change };
-            }
-        }
-    } catch(error) {
-        console.error('API Error:', error);
-    }
-    
-    // Use hardcoded current values as fallback
-    const currentPrice = 0.00000114;
-    const currentChange = -17.00;
-    
-    document.getElementById('currentPrice').textContent = `$${currentPrice.toFixed(8)}`;
-    document.getElementById('change24').textContent = `${currentChange.toFixed(2)}%`;
-    document.getElementById('change24').className = 'stat-value negative';
-    document.getElementById('volume24').textContent = '$3.5K';
-    document.getElementById('highLow').textContent = '$0.00000125 / $0.00000103';
-    
-    updateSignal(currentPrice, currentChange);
-    
-    const statusEl = document.getElementById('apiStatus');
-    if (statusEl) {
-        statusEl.innerHTML = '<span style="color: #fbbf24;">⚠️ Using Static Data</span>';
-    }
-    
-    return { success: false, price: currentPrice, change: currentChange };
-}
-
-// Update trading signal
-function updateSignal(price, change) {
-    const signalBox = document.getElementById('signalBox');
-    const signalText = document.getElementById('signalText');
-    const signalReason = document.getElementById('signalReason');
-    
-    if (!signalBox || !signalText || !signalReason) return;
-    
-    let signal = 'HOLD';
-    let reason = 'Market is neutral';
-    let signalClass = 'hold';
-    
-    // Mit -17% ist es definitiv BUY Signal
-    if (change < -10) {
-        signal = 'BUY';
-        reason = 'Strong dip - excellent entry point';
-        signalClass = 'buy';
-    } else if (change < -5) {
-        signal = 'BUY';
-        reason = 'Good entry point at discount';
-        signalClass = 'buy';
-    } else if (change > 5) {
-        signal = 'SELL';
-        reason = 'Strong upward movement';
-        signalClass = 'sell';
-    } else if (change > 2) {
-        signal = 'HOLD';
-        reason = 'Moderate upward trend';
-        signalClass = 'hold';
-    }
-    
-    signalBox.className = `signal-display ${signalClass}`;
-    signalText.textContent = signal;
-    signalReason.textContent = reason;
-    
-    // Update indicators based on actual market conditions
-    const rsiEl = document.getElementById('rsi');
-    if (rsiEl) {
-        // Mit -17% sollte RSI niedrig sein (oversold)
-        const rsi = change < -10 ? Math.floor(20 + Math.random() * 15) : 50 + (change * 3);
-        rsiEl.textContent = Math.max(0, Math.min(100, Math.round(rsi)));
-    }
-    
-    const macdEl = document.getElementById('macd');
-    if (macdEl) {
-        macdEl.textContent = (change / 2).toFixed(2) + '%';
-    }
-    
-    const trendEl = document.getElementById('trend');
-    if (trendEl) {
-        trendEl.textContent = change < -5 ? 'DOWN' : change > 5 ? 'UP' : 'NEUTRAL';
-    }
+    });
 }
 
 // Load page
@@ -153,8 +43,11 @@ async function loadPage(pageName) {
     console.log(`Lade Seite: ${pageName}`);
     window.currentPage = pageName;
     
+    // Update active navigation
+    updateActiveNavigation(pageName);
+    
     const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '<div class="loading-spinner">Loading...</div>';
+    mainContent.innerHTML = '<div class="loading-spinner"><div class="spinner-text">Loading...</div></div>';
     
     try {
         let html;
@@ -186,15 +79,13 @@ async function loadPage(pageName) {
                 
                 // Update chart with realistic down trend
                 if (window.liveChart) {
-                    // Simulate -17% drop over the day
                     const endPrice = 0.00000114;
-                    const startPrice = endPrice / 0.83; // 17% higher at start
+                    const startPrice = endPrice / 0.83;
                     const chartData = [];
                     
                     for (let i = 0; i <= 20; i++) {
                         const progress = i / 20;
                         const price = startPrice - (startPrice - endPrice) * progress;
-                        // Add some volatility
                         const volatility = (Math.random() - 0.5) * 0.00000005;
                         chartData.push(Math.max(endPrice * 0.9, price + volatility));
                     }
@@ -220,8 +111,141 @@ async function loadPage(pageName) {
     }
 }
 
+// Fetch KDAO data using proxy
+async function testAPI() {
+    console.log('Fetching KDAO data...');
+    
+    try {
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const apiUrl = 'https://api.coinex.com/v1/market/ticker?market=KDAOUSDT';
+        
+        let response = await fetch(apiUrl).catch(() => null);
+        
+        if (!response || !response.ok) {
+            console.log('Direct API failed, trying proxy...');
+            response = await fetch(proxyUrl + apiUrl);
+        }
+        
+        if (response && response.ok) {
+            const data = await response.json();
+            
+            if (data.code === 0 && data.data && data.data.ticker) {
+                const ticker = data.data.ticker;
+                const price = parseFloat(ticker.last) || 0.00000114;
+                const open = parseFloat(ticker.open) || price;
+                const change = ((price - open) / open * 100) || -17.00;
+                const volume = parseFloat(ticker.vol) || 3500;
+                const high = parseFloat(ticker.high) || price * 1.1;
+                const low = parseFloat(ticker.low) || price * 0.9;
+                
+                if (document.getElementById('currentPrice')) {
+                    document.getElementById('currentPrice').textContent = `$${price.toFixed(8)}`;
+                    document.getElementById('change24').textContent = `${change > 0 ? '+' : ''}${change.toFixed(2)}%`;
+                    document.getElementById('change24').className = `stat-value ${change > 0 ? 'positive' : 'negative'}`;
+                    document.getElementById('volume24').textContent = volume > 1000 ? `$${(volume / 1000).toFixed(1)}K` : `$${volume.toFixed(0)}`;
+                    document.getElementById('highLow').textContent = `$${high.toFixed(8)} / $${low.toFixed(8)}`;
+                    
+                    updateSignal(price, change);
+                }
+                
+                const statusEl = document.getElementById('apiStatus');
+                if (statusEl) {
+                    statusEl.innerHTML = '<span class="status-dot active"></span><span class="status-text">Live Data Connected</span>';
+                }
+                
+                return { success: true, price, change };
+            }
+        }
+    } catch(error) {
+        console.error('API Error:', error);
+    }
+    
+    const currentPrice = 0.00000114;
+    const currentChange = -17.00;
+    
+    if (document.getElementById('currentPrice')) {
+        document.getElementById('currentPrice').textContent = `$${currentPrice.toFixed(8)}`;
+        document.getElementById('change24').textContent = `${currentChange.toFixed(2)}%`;
+        document.getElementById('change24').className = 'stat-value negative';
+        document.getElementById('volume24').textContent = '$3.5K';
+        document.getElementById('highLow').textContent = '$0.00000125 / $0.00000103';
+        
+        updateSignal(currentPrice, currentChange);
+    }
+    
+    const statusEl = document.getElementById('apiStatus');
+    if (statusEl) {
+        statusEl.innerHTML = '<span class="status-dot"></span><span class="status-text">Using Static Data</span>';
+    }
+    
+    return { success: false, price: currentPrice, change: currentChange };
+}
+
+// Update trading signal
+function updateSignal(price, change) {
+    const signalBox = document.getElementById('signalBox');
+    const signalText = document.getElementById('signalText');
+    const signalReason = document.getElementById('signalReason');
+    
+    if (!signalBox || !signalText || !signalReason) return;
+    
+    let signal = 'HOLD';
+    let reason = 'Market is neutral';
+    let signalClass = 'hold';
+    
+    if (change < -10) {
+        signal = 'BUY';
+        reason = 'Strong dip - excellent entry point';
+        signalClass = 'buy';
+    } else if (change < -5) {
+        signal = 'BUY';
+        reason = 'Good entry point at discount';
+        signalClass = 'buy';
+    } else if (change > 5) {
+        signal = 'SELL';
+        reason = 'Strong upward movement';
+        signalClass = 'sell';
+    } else if (change > 2) {
+        signal = 'HOLD';
+        reason = 'Moderate upward trend';
+        signalClass = 'hold';
+    }
+    
+    signalBox.className = `signal-display ${signalClass}`;
+    signalText.textContent = signal;
+    signalReason.textContent = reason;
+    
+    const rsiEl = document.getElementById('rsi');
+    if (rsiEl) {
+        const rsi = change < -10 ? Math.floor(20 + Math.random() * 15) : 50 + (change * 3);
+        rsiEl.textContent = Math.max(0, Math.min(100, Math.round(rsi)));
+    }
+    
+    const macdEl = document.getElementById('macd');
+    if (macdEl) {
+        macdEl.textContent = (change / 2).toFixed(2) + '%';
+    }
+    
+    const trendEl = document.getElementById('trend');
+    if (trendEl) {
+        trendEl.textContent = change < -5 ? 'DOWN' : change > 5 ? 'UP' : 'NEUTRAL';
+    }
+}
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('active');
+}
+
 // Store current page
 window.currentPage = 'dashboard';
+
+// Export functions to window
+window.loadPage = loadPage;
+window.setLanguage = setLanguage;
+window.toggleMobileMenu = toggleMobileMenu;
+window.updateSignal = updateSignal;
 
 // Auto-refresh every 30 seconds
 setInterval(async () => {
@@ -230,7 +254,6 @@ setInterval(async () => {
         console.log(`[${time}] Refreshing data...`);
         await testAPI();
         
-        // Pulse effect
         const priceEl = document.getElementById('currentPrice');
         if (priceEl) {
             priceEl.style.transition = 'color 0.5s';
@@ -244,31 +267,20 @@ setInterval(async () => {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('kdao-lang') || 'en';
+    const savedLang = localStorage.getItem('kdao-lang') || 'de';
     setLanguage(savedLang);
     
     setTimeout(() => {
         loadPage('dashboard');
     }, 100);
     
-    // Create status indicator
     if (!document.getElementById('apiStatus')) {
         const statusDiv = document.createElement('div');
         statusDiv.id = 'apiStatus';
-        statusDiv.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(10, 15, 27, 0.9);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid rgba(95, 251, 241, 0.2);
-            font-size: 12px;
-            z-index: 9999;
-        `;
-        statusDiv.innerHTML = '<span style="color: #94a3b8;">Connecting...</span>';
+        statusDiv.className = 'api-status';
+        statusDiv.innerHTML = '<span class="status-dot"></span><span class="status-text">Connecting...</span>';
         document.body.appendChild(statusDiv);
     }
 });
 
-console.log('App.js loaded');
+console.log('App.js loaded - Navigation fix applied');
