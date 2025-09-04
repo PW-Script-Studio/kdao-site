@@ -143,11 +143,15 @@
             </div>
         </div>
 
-        <!-- Footer Info -->
+        <!-- Footer Info with hidden Admin Access -->
         <div class="sidebar-footer">
             <div class="footer-info">
                 <small data-lang="de">© 2025 KDAO 2.0</small>
                 <small data-lang="en" style="display:none;">© 2025 KDAO 2.0</small>
+            </div>
+            <!-- Hidden Admin Button -->
+            <div class="admin-access" onclick="window.location.href='pages/admin.html'" style="margin-top: 10px; opacity: 0.1; transition: opacity 0.3s; cursor: pointer;">
+                <small style="font-size: 10px;">🔐</small>
             </div>
         </div>
     </div>
@@ -299,6 +303,11 @@
             font-size: 12px;
         }
 
+        /* Admin Access - Hidden but accessible */
+        .admin-access:hover {
+            opacity: 0.5 !important;
+        }
+
         /* Quick Fixes */
         .stat-value.positive {
             color: #10b981 !important;
@@ -323,6 +332,7 @@
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                z-index: 10000;
             }
 
             .sidebar.active {
