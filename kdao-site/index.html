@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KDAO 2.0</title>
+    
+    <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sidebar.css">
-    <!-- Additional CSS -->
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/dashboard.css">
-
 </head>
 <body>
     <!-- Language Switcher -->
@@ -18,50 +18,140 @@
         <button class="lang-btn" onclick="setLanguage('de')">🇩🇪 DE</button>
     </div>
 
-
-        <!-- Animated Background -->
-        <div class="bg-animation">
-            <div class="animated-gradient"></div>
-            <div class="aurora-container">
-                <div class="aurora"></div>
-                <div class="aurora"></div>
-            </div>
-            <div class="floating-orbs">
-                <div class="orb"></div>
-                <div class="orb"></div>
-                <div class="orb"></div>
-            </div>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="animated-gradient"></div>
+        <div class="aurora-container">
+            <div class="aurora"></div>
+            <div class="aurora"></div>
         </div>
+        <div class="floating-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+    </div>
 
-        <!-- KDAO Floating Texts -->
-        <div class="bg-particles" id="particles"></div>
+    <!-- KDAO Floating Texts -->
+    <div class="bg-particles" id="particles"></div>
+
+    <!-- API Status Indicator -->
+    <div id="apiStatus" style="position: fixed; bottom: 20px; right: 20px; background: rgba(10, 15, 27, 0.9); padding: 10px 15px; border-radius: 8px; border: 1px solid rgba(95, 251, 241, 0.2); font-size: 12px; z-index: 9999; display: flex; align-items: center; gap: 8px;">
+        <span style="color: #94a3b8;">API Status: Initialisiere...</span>
+    </div>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="logo">KDAO 2.0</div>
-        <div class="nav-item" onclick="loadPage('dashboard')">
+        <div class="logo">
+            <span class="kdao-k">K</span>DAO 2.0
+        </div>
+        <div class="nav-item active" onclick="loadPage('dashboard')">
             🏠 Dashboard
         </div>
         <div class="nav-item" onclick="loadPage('team')">
             👥 Team
         </div>
+        <div class="nav-item" onclick="loadPage('news')">
+            📰 News
+        </div>
+        <div class="nav-item" onclick="loadPage('roadmap')">
+            🗺️ Roadmap
+        </div>
+        <div class="nav-item" onclick="loadPage('staking')">
+            💎 Staking
+        </div>
+        <div class="nav-item" onclick="loadPage('treasury')">
+            🏦 Treasury
+        </div>
+        <div class="nav-item" onclick="loadPage('governance')">
+            🗳️ Governance
+        </div>
+        
+        <!-- Sidebar Footer -->
+        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px;">
+            <div class="nav-item" onclick="window.open('https://discord.gg/kaspadao', '_blank')">
+                💬 Discord
+            </div>
+            <div class="nav-item" onclick="window.open('https://www.coinex.com/en/exchange/kdao-usdt', '_blank')">
+                💱 Trade on CoinEx
+            </div>
+        </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="test-box">
-            <h1>KDAO 2.0 Setup</h1>
-            <button onclick="testAPI()">Test API</button>
-        </div>
+        <div class="loading-spinner">Loading KDAO 2.0...</div>
     </div>
 
-    <!-- Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Animations -->
+    <!-- Chart.js Library - WICHTIG: Muss VOR den anderen Scripts geladen werden! -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Optional: Candlestick Plugin für Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.1.1/dist/chartjs-chart-financial.min.js"></script>
+    
+    <!-- Date adapter for Chart.js time scales -->
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    
+    <!-- App Scripts - WICHTIGE REIHENFOLGE! -->
     <script src="js/animations.js"></script>
-
     <script src="js/charts.js"></script>
-
     <script src="js/app.js"></script>
+    
+    <style>
+        /* KDAO K Mirror Effect */
+        .kdao-k {
+            display: inline-block;
+            transform: scaleX(-1);
+            font-weight: 900;
+            background: linear-gradient(135deg, #5ffbf1 0%, #49eacb 50%, #26d0a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+            color: #5ffbf1;
+            font-size: 18px;
+        }
+        
+        .loading-spinner::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            border: 2px solid #5ffbf1;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Quick fixes for visibility */
+        .stat-value.positive {
+            color: #10b981 !important;
+        }
+        
+        .stat-value.negative {
+            color: #ef4444 !important;
+        }
+        
+        /* Canvas container fix */
+        .chart-container {
+            position: relative;
+            height: 200px;
+        }
+        
+        #liveChart, #sparkline {
+            max-height: 100%;
+            width: 100% !important;
+        }
+    </style>
 </body>
 </html>
