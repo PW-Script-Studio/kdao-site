@@ -1,0 +1,157 @@
+<div class="hero-section">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <h1 class="welcome-title">
+            <span class="kdao-k">K</span>DAO 2.0
+        </h1>
+        <p class="welcome-subtitle">
+            <span data-lang="en">Next-Generation DeFi Engine for the Kaspa Ecosystem</span>
+            <span data-lang="de" style="display:none;">Next-Generation DeFi Engine für das Kaspa-Ökosystem</span>
+        </p>
+    </div>
+
+    <!-- Analytics Cards -->
+    <div class="analytics-container">
+
+        <!-- Card 1: Live Chart -->
+        <div class="analytics-card">
+            <div class="card-header">
+                <div class="card-icon">📈</div>
+                <div class="card-info">
+                    <h3>Live Chart</h3>
+                    <p><span class="kdao-k">K</span>DAO / USDT</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="liveChart" style="width: 100%; height: 100%;"></canvas>
+            </div>
+        </div>
+
+        <!-- Card 2: Market Stats -->
+        <div class="analytics-card">
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <div class="card-info">
+                    <h3>
+                        <span data-lang="en">Market Statistics</span>
+                        <span data-lang="de" style="display:none;">Marktstatistiken</span>
+                    </h3>
+                    <p>Live CoinEx Data <span id="liveIndicator" style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; margin-left: 5px;"></span></p>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-row">
+                    <span class="stat-label">
+                        <span data-lang="en">Current Price</span>
+                        <span data-lang="de" style="display:none;">Aktueller Preis</span>
+                    </span>
+                    <span class="stat-value" id="currentPrice">Loading...</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">
+                        <span data-lang="en">24h Change</span>
+                        <span data-lang="de" style="display:none;">24h Änderung</span>
+                    </span>
+                    <span class="stat-value" id="change24">Loading...</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">
+                        <span data-lang="en">24h Volume</span>
+                        <span data-lang="de" style="display:none;">24h Volumen</span>
+                    </span>
+                    <span class="stat-value" id="volume24">Loading...</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">
+                        <span data-lang="en">24h High/Low</span>
+                        <span data-lang="de" style="display:none;">24h Hoch/Tief</span>
+                    </span>
+                    <span class="stat-value" id="highLow">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Trading Signal -->
+        <div class="analytics-card">
+            <div class="card-header">
+                <div class="card-icon">🎯</div>
+                <div class="card-info">
+                    <h3>Trading Signal</h3>
+                    <p>AI Analysis</p>
+                </div>
+            </div>
+            <div class="signal-display" id="signalBox">
+                <div class="signal-text" id="signalText">ANALYZING...</div>
+                <div class="signal-reason" id="signalReason">Loading market data...</div>
+                <div class="signal-metrics">
+                    <div class="metric-box">
+                        <div class="metric-label">RSI</div>
+                        <div class="metric-value" id="rsi">-</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">MACD</div>
+                        <div class="metric-value" id="macd">-</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Trend</div>
+                        <div class="metric-value" id="trend">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div> <!-- Ende analytics-container -->
+
+        <!-- Vision Section -->
+        <div style="max-width: 1200px; margin: 80px auto 60px; padding: 0 20px;">
+            <div style="background: linear-gradient(135deg, rgba(14, 28, 54, 0.6) 0%, rgba(10, 20, 40, 0.8) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(95, 251, 241, 0.15); border-radius: 24px; padding: 50px;">
+
+                <h2 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 40px; background: linear-gradient(135deg, #5ffbf1 0%, #49eacb 50%, #26d0a8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    <span data-lang="en">The Vision of <span class="kdao-k">K</span>DAO 2.0</span>
+                    <span data-lang="de" style="display:none;">Die Vision von <span class="kdao-k">K</span>DAO 2.0</span>
+                </h2>
+
+                <!-- Englischer Text -->
+                <div data-lang="en" style="font-size: 16px; line-height: 1.8; color: rgba(255, 255, 255, 0.9);">
+                    <p style="margin-bottom: 25px;">
+                        <strong style="color: #5ffbf1;">KDAO 2.0 is more than just another step in the DeFi sector</strong> – it's a clear sign that our community has learned from past experiences and is now looking toward the future stronger than ever. We believe that transparency, participation, and trust are the foundation of every successful project. That's why we're building a system where the community is at the center and every voice counts.
+                    </p>
+                    <p style="margin-bottom: 25px;">
+                        <strong style="color: #49eacb;">Our vision is to sustainably strengthen the Kaspa ecosystem</strong> by promoting innovative projects, establishing fair governance structures, and giving all members the opportunity to actively participate in success. Every contribution – whether large or small – brings us closer to our goal of creating a truly decentralized and stable platform. KDAO 2.0 should not just be a token, but an engine for growth, creativity, and collaboration.
+                    </p>
+                    <p style="margin-bottom: 25px;">
+                        <strong style="color: #26d0a8;">We know: Trust is built through actions, not words.</strong> That's why we're consistently working to make all processes open, transparent, and fair. This way, new investors, developers, and supporters can be confident that their decisions are embedded in a strong, vibrant, and honest community.
+                    </p>
+                    <p>
+                        <strong style="color: #5ffbf1;">The future of KDAO lies not in the hands of a few, but in the power of many.</strong> When we stand together, share ideas, and work together, we can achieve more than many can imagine today. This is the beginning of a new era – and you are part of it.
+                    </p>
+                </div>
+
+                <!-- Deutscher Text -->
+                <div data-lang="de" style="display:none; font-size: 16px; line-height: 1.8; color: rgba(255, 255, 255, 0.9);">
+                    <p style="margin-bottom: 25px;">
+                        <strong style="color: #5ffbf1;">KDAO 2.0 ist mehr als nur ein weiterer Schritt im DeFi-Sektor</strong> – es ist ein klares Zeichen dafür, dass unsere Community aus den Erfahrungen der Vergangenheit gelernt hat und nun stärker denn je in die Zukunft blickt. Wir glauben daran, dass Transparenz, Mitbestimmung und Vertrauen die Grundlage jedes erfolgreichen Projektes sind. Aus diesem Grund setzen wir auf ein System, in dem die Community im Mittelpunkt steht und jede Stimme zählt.
+                    </p>
+                    <p style="margin-bottom: 25px;">
+                        <strong style="color: #49eacb;">Unsere Vision ist es, das Kaspa-Ökosystem nachhaltig zu stärken</strong>, indem wir innovative Projekte fördern, faire Governance-Strukturen etablieren und allen Mitgliedern die Möglichkeit geben, aktiv am Erfolg teilzuhaben. Jeder Beitrag – ob groß oder klein – bringt uns näher an unser Ziel, eine wirklich dezentrale und stabile Plattform zu schaffen. KDAO 2.0 soll nicht nur ein Token sein, sondern ein Motor für Wachstum, Kreativität und Zusammenarbeit.
+                    </p>
+                    <p style="margin-bottom: 25px;">
+                        <strong style="color: #26d0a8;">Wir wissen: Vertrauen entsteht nicht durch Worte, sondern durch Taten.</strong> Deshalb arbeiten wir konsequent daran, alle Prozesse offen, nachvollziehbar und fair zu gestalten. So können sich neue Investoren, Entwickler und Unterstützer sicher sein, dass ihre Entscheidungen in einer starken, lebendigen und ehrlichen Gemeinschaft eingebettet sind.
+                    </p>
+                    <p>
+                        <strong style="color: #5ffbf1;">Die Zukunft von KDAO liegt nicht in den Händen einzelner, sondern in der Kraft vieler.</strong> Wenn wir zusammenhalten, Ideen teilen und gemeinsam anpacken, dann können wir mehr erreichen, als sich viele heute vorstellen können. Dies ist der Beginn einer neuen Ära – und du bist ein Teil davon.
+                    </p>
+                </div>
+
+                <!-- Call to Action Button -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <button onclick="window.open('https://discord.gg/kaspadao', '_blank')" style="padding: 15px 40px; background: linear-gradient(135deg, #5ffbf1 0%, #26d0a8 100%); color: #030712; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(95, 251, 241, 0.3);">
+                        <span data-lang="en">Join the Community</span>
+                        <span data-lang="de" style="display:none;">Werde Teil der Community</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
