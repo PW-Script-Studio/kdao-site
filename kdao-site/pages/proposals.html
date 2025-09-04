@@ -1,0 +1,442 @@
+<div class="proposals-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 class="page-title">
+            <span class="kdao-k">K</span>DAO Proposals
+        </h1>
+        <p class="page-subtitle">
+            <span data-lang="de">Reiche Vorschläge ein und diskutiere über die Zukunft von KDAO</span>
+            <span data-lang="en" style="display:none;">Submit proposals and discuss the future of KDAO</span>
+        </p>
+    </div>
+
+    <!-- Create Proposal Button -->
+    <div style="text-align: center; margin-bottom: 40px;">
+        <button class="create-proposal-btn" onclick="alert('Proposal-Einreichung kommt bald!')">
+            <span>+ </span>
+            <span data-lang="de">Neuen Vorschlag einreichen</span>
+            <span data-lang="en" style="display:none;">Submit New Proposal</span>
+        </button>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterProposals('all')">
+            <span data-lang="de">Alle</span>
+            <span data-lang="en" style="display:none;">All</span>
+        </button>
+        <button class="filter-tab" onclick="filterProposals('active')">
+            <span data-lang="de">Aktiv</span>
+            <span data-lang="en" style="display:none;">Active</span>
+        </button>
+        <button class="filter-tab" onclick="filterProposals('pending')">
+            <span data-lang="de">Ausstehend</span>
+            <span data-lang="en" style="display:none;">Pending</span>
+        </button>
+        <button class="filter-tab" onclick="filterProposals('completed')">
+            <span data-lang="de">Abgeschlossen</span>
+            <span data-lang="en" style="display:none;">Completed</span>
+        </button>
+    </div>
+
+    <!-- Proposals List -->
+    <div class="proposals-list">
+        
+        <!-- Active Proposal -->
+        <div class="proposal-card active" data-status="active">
+            <div class="proposal-header">
+                <div>
+                    <span class="proposal-id">#KIP-001</span>
+                    <span class="proposal-status active">
+                        <span data-lang="de">Aktiv</span>
+                        <span data-lang="en" style="display:none;">Active</span>
+                    </span>
+                </div>
+                <span class="proposal-time">
+                    <span data-lang="de">Endet in 3 Tagen</span>
+                    <span data-lang="en" style="display:none;">Ends in 3 days</span>
+                </span>
+            </div>
+            
+            <h3 class="proposal-title">
+                <span data-lang="de">Treasury Allocation für Q4 2025</span>
+                <span data-lang="en" style="display:none;">Treasury Allocation for Q4 2025</span>
+            </h3>
+            
+            <p class="proposal-description">
+                <span data-lang="de">Vorschlag zur optimalen Verteilung der Treasury-Mittel für Marketing, Entwicklung und Community-Rewards im vierten Quartal 2025. Ziel ist es, das Wachstum zu maximieren und gleichzeitig die finanzielle Nachhaltigkeit zu gewährleisten.</span>
+                <span data-lang="en" style="display:none;">Proposal for optimal distribution of treasury funds for marketing, development and community rewards in Q4 2025. The goal is to maximize growth while ensuring financial sustainability.</span>
+            </p>
+            
+            <div class="proposal-meta">
+                <span>👤 Peter W.</span>
+                <span>📅 01.09.2025</span>
+                <span>💬 23 <span data-lang="de">Kommentare</span><span data-lang="en" style="display:none;">Comments</span></span>
+                <span>👍 156 <span data-lang="de">Unterstützer</span><span data-lang="en" style="display:none;">Supporters</span></span>
+            </div>
+            
+            <div class="proposal-actions">
+                <button class="btn-primary">
+                    <span data-lang="de">Details ansehen</span>
+                    <span data-lang="en" style="display:none;">View Details</span>
+                </button>
+                <button class="btn-secondary">
+                    <span data-lang="de">Diskutieren</span>
+                    <span data-lang="en" style="display:none;">Discuss</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Pending Proposal -->
+        <div class="proposal-card" data-status="pending">
+            <div class="proposal-header">
+                <div>
+                    <span class="proposal-id">#KIP-002</span>
+                    <span class="proposal-status pending">
+                        <span data-lang="de">Ausstehend</span>
+                        <span data-lang="en" style="display:none;">Pending</span>
+                    </span>
+                </div>
+                <span class="proposal-time">
+                    <span data-lang="de">Startet in 2 Tagen</span>
+                    <span data-lang="en" style="display:none;">Starts in 2 days</span>
+                </span>
+            </div>
+            
+            <h3 class="proposal-title">
+                <span data-lang="de">Partnerschaft mit Zealous Swap</span>
+                <span data-lang="en" style="display:none;">Partnership with Zealous Swap</span>
+            </h3>
+            
+            <p class="proposal-description">
+                <span data-lang="de">Integration von KDAO in den Zealous Swap DEX mit exklusiven Liquidity Mining Rewards für frühe Teilnehmer.</span>
+                <span data-lang="en" style="display:none;">Integration of KDAO into Zealous Swap DEX with exclusive liquidity mining rewards for early participants.</span>
+            </p>
+            
+            <div class="proposal-meta">
+                <span>👤 Community</span>
+                <span>📅 28.08.2025</span>
+                <span>💬 45 <span data-lang="de">Kommentare</span><span data-lang="en" style="display:none;">Comments</span></span>
+                <span>👍 203 <span data-lang="de">Unterstützer</span><span data-lang="en" style="display:none;">Supporters</span></span>
+            </div>
+            
+            <div class="proposal-actions">
+                <button class="btn-primary">
+                    <span data-lang="de">Details ansehen</span>
+                    <span data-lang="en" style="display:none;">View Details</span>
+                </button>
+                <button class="btn-secondary">
+                    <span data-lang="de">Diskutieren</span>
+                    <span data-lang="en" style="display:none;">Discuss</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Completed Proposal -->
+        <div class="proposal-card completed" data-status="completed">
+            <div class="proposal-header">
+                <div>
+                    <span class="proposal-id">#KIP-000</span>
+                    <span class="proposal-status completed">
+                        <span data-lang="de">Abgeschlossen</span>
+                        <span data-lang="en" style="display:none;">Completed</span>
+                    </span>
+                </div>
+                <span class="proposal-result approved">
+                    ✅ <span data-lang="de">Angenommen</span><span data-lang="en" style="display:none;">Approved</span>
+                </span>
+            </div>
+            
+            <h3 class="proposal-title">
+                <span data-lang="de">KDAO 2.0 Governance Struktur</span>
+                <span data-lang="en" style="display:none;">KDAO 2.0 Governance Structure</span>
+            </h3>
+            
+            <p class="proposal-description">
+                <span data-lang="de">Etablierung der grundlegenden Governance-Struktur für KDAO 2.0 mit klaren Rollen und Verantwortlichkeiten.</span>
+                <span data-lang="en" style="display:none;">Establishment of the basic governance structure for KDAO 2.0 with clear roles and responsibilities.</span>
+            </p>
+            
+            <div class="proposal-meta">
+                <span>👤 KDAO Team</span>
+                <span>📅 15.08.2025</span>
+                <span>🗳️ 89% <span data-lang="de">Zustimmung</span><span data-lang="en" style="display:none;">Approval</span></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+/* Proposals Page Styles */
+.proposals-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #5ffbf1;
+    text-shadow: 0 0 20px rgba(95, 251, 241, 0.5);
+}
+
+.page-subtitle {
+    font-size: 16px;
+    color: #94a3b8;
+}
+
+/* Create Proposal Button */
+.create-proposal-btn {
+    padding: 15px 35px;
+    background: linear-gradient(135deg, #5ffbf1 0%, #26d0a8 100%);
+    color: #030712;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(95, 251, 241, 0.3);
+}
+
+.create-proposal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(95, 251, 241, 0.4);
+}
+
+/* Filter Tabs */
+.filter-tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 10px 24px;
+    background: rgba(95, 251, 241, 0.1);
+    border: 1px solid rgba(95, 251, 241, 0.2);
+    color: #94a3b8;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.filter-tab:hover {
+    background: rgba(95, 251, 241, 0.2);
+    color: #ffffff;
+}
+
+.filter-tab.active {
+    background: linear-gradient(135deg, #5ffbf1 0%, #26d0a8 100%);
+    color: #030712;
+    border-color: transparent;
+}
+
+/* Proposals List */
+.proposals-list {
+    display: grid;
+    gap: 25px;
+}
+
+/* Proposal Card */
+.proposal-card {
+    background: linear-gradient(135deg, rgba(14, 28, 54, 0.6) 0%, rgba(10, 20, 40, 0.8) 100%);
+    border: 1px solid rgba(95, 251, 241, 0.15);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.proposal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(95, 251, 241, 0.25);
+}
+
+.proposal-card.active {
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.proposal-card.completed {
+    opacity: 0.8;
+}
+
+.proposal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 20px;
+}
+
+.proposal-id {
+    font-size: 13px;
+    color: #5ffbf1;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.proposal-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.proposal-status.active {
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.proposal-status.pending {
+    background: rgba(251, 191, 36, 0.2);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+}
+
+.proposal-status.completed {
+    background: rgba(100, 116, 139, 0.2);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+    color: #94a3b8;
+}
+
+.proposal-time {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.proposal-result {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.proposal-result.approved {
+    color: #10b981;
+}
+
+.proposal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.proposal-description {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.proposal-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.proposal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #5ffbf1 0%, #26d0a8 100%);
+    color: #030712;
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(95, 251, 241, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #5ffbf1;
+    border: 1px solid rgba(95, 251, 241, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(95, 251, 241, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 32px;
+    }
+    
+    .proposal-card {
+        padding: 20px;
+    }
+    
+    .proposal-title {
+        font-size: 18px;
+    }
+    
+    .proposal-actions {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
+}
+</style>
+
+<script>
+// Filter proposals
+function filterProposals(status) {
+    // Update active tab
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Filter cards
+    document.querySelectorAll('.proposal-card').forEach(card => {
+        if (status === 'all') {
+            card.style.display = 'block';
+        } else {
+            card.style.display = card.dataset.status === status ? 'block' : 'none';
+        }
+    });
+}
+
+// Apply saved language
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('kdao-lang') || 'de';
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        element.style.display = 'none';
+    });
+    document.querySelectorAll(`[data-lang="${savedLang}"]`).forEach(element => {
+        element.style.display = element.tagName === 'SPAN' ? 'inline' : 'block';
+    });
+});
+</script>
